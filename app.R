@@ -325,13 +325,41 @@ ui <- page_sidebar(
              line-height: 1.1;"
   ),
   
+  # Информация о приложении и о нас
   tags$div(
-    "🍓 Клубничная команда: Авдеева Полина, Войтова Ксения, Кретов Владимир",
-    style = "font-family: 'Inter', sans-serif;
-             font-size: 1.4rem;
-             color: #770205;
-             margin-top: 0.2rem;"
-  ), 
+    style = "display: flex; justify-content: space-between; align-items: center; margin-top: 0.2rem; margin-bottom: 0.8rem; flex-wrap: wrap; gap: 10px;",
+    
+    # Название команды
+    tags$div(
+      "🍓 Клубничная команда: Авдеева Полина, Войтова Ксения, Кретов Владимир",
+      style = "font-family: 'Inter', sans-serif;
+               font-size: 1.4rem;
+               color: #770205;
+               flex: 1;"
+    ),
+    
+    # Ссылка на GitHub
+    tags$a(
+      href = "https://github.com/polina03avdeevaa/App_R",
+      target = "_blank",
+      style = "display: inline-flex; align-items: center; gap: 8px; 
+               background-color: #770205; color: #D6D1BC; 
+               padding: 8px 16px; border-radius: 20px; 
+               text-decoration: none; font-family: 'Inter', sans-serif;
+               font-size: 1.1rem; font-weight: 500;
+               transition: all 0.3s ease;
+               border: 2px solid #770205;",
+      onmouseover = "this.style.backgroundColor='#9C0D0F'; this.style.borderColor='#9C0D0F';",
+      onmouseout = "this.style.backgroundColor='#770205'; this.style.borderColor='#770205';",
+      tags$img(
+        src = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+        style = "height: 24px; width: 24px; filter: brightness(0) invert(1);"
+      ),
+      "GitHub"
+    )
+  ),
+
+  
   
   theme = theme_custom,
   sidebar = sidebar(
@@ -342,7 +370,28 @@ ui <- page_sidebar(
     sliderInput("top_words", "Количество слов на графиках:",
                 min = 5, max = 15, value = 5, step = 1),
     actionButton("predict_btn", "🍨 Проанализировать текст", 
-                 class = "btn-primary")
+                 class = "btn-primary"), 
+    # Короткое описание приложения
+    tags$div(
+      style = "background-color: rgba(175, 164, 73, 0.12); 
+             border-left: 3px solid #AFA449; 
+             padding: 8px 16px; 
+             margin-bottom: 14px; 
+             border-radius: 6px;
+             font-family: 'Inter', sans-serif;",
+      
+      tags$p(
+        style = "margin: 0; font-size: 0.95rem; line-height: 1.5; color: #3D402F;",
+        tags$span(style = "font-weight: 700; color: #655D1D;", "☁️ Инструмент"),
+        " для анализа русскоязычных текстов: подсчёт статистики, ",
+        "частотность слов, облако, биграммы и части речи. ",
+        "Использует", 
+        tags$a(href = "https://ufal.mff.cuni.cz/udpipe", target = "_blank", 
+               style = "color: #770205; font-weight: 500; text-decoration: underline;",
+               "UDPipe"),
+        " для лемматизации."
+      )
+    ),
   ),
   tags$head(
     tags$style(HTML("
@@ -374,58 +423,6 @@ ui <- page_sidebar(
       .btn-primary:hover,
       .dataTables_wrapper .dt-buttons .btn:hover,
       .dataTables_wrapper .dt-buttons .btn-default:hover {
-        background-color: #9c9239 !important;
-        border-color: #7a702a !important;
-      }
-      
-      .dataTables_wrapper .dataTables_paginate .paginate_button,
-      .dataTables_wrapper .dataTables_paginate .paginate_button.current,
-      .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
-        background-color: #AFA449 !important;
-        background-image: none !important;
-        border: 1px solid #8f8838 !important;
-        border-radius: 4px !important;
-        color: #655D1D !important;
-        padding: 6px 12px !important;
-        margin: 0 2px !important;
-        box-shadow: none !important;
-        outline: none !important;
-        font-size: 0.9rem !important;
-      }
-      
-      .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-        background-color: #9c9239 !important;
-        background-image: none !important;
-        border-color: #7a702a !important;
-        color: #655D1D !important;
-        box-shadow: none !important;
-        outline: none !important;
-      }
-      
-      .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-        background-color: #9c9239 !important;
-        background-image: none !important;
-        border-color: #7a702a !important;
-        color: #655D1D !important;
-        box-shadow: none !important;
-        outline: none !important;
-      }
-
-      .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
-        background-color: #D6D1BC !important;
-        background-image: none !important;
-        border-color: #AFA449 !important;
-        color: #655D1D !important;
-        opacity: 0.5;
-        cursor: not-allowed;
-        box-shadow: none !important;
-        outline: none !important;
-      }
-
-      .dataTables_wrapper .dataTables_paginate .paginate_button:focus,
-      .dataTables_wrapper .dataTables_paginate .paginate_button:active {
-        box-shadow: none !important;
-        outline: none !important;
         background-color: #9c9239 !important;
         border-color: #7a702a !important;
       }
